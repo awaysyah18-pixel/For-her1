@@ -1,1 +1,826 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>For You ♡</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow: hidden;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family: "Poppins", Arial, sans-serif;
+
+            background: linear-gradient(
+                -45deg,
+                #ff9a9e,
+                #fad0c4,
+                #a18cd1,
+                #fbc2eb,
+                #8fd3f4
+            );
+
+            background-size: 400% 400%;
+
+            animation: gradientMove 12s ease infinite;
+        }
+
+        /* =========================
+           BACKGROUND ANIMATION
+        ========================= */
+
+        @keyframes gradientMove {
+
+            0% {
+                background-position: 0% 50%;
+            }
+
+            25% {
+                background-position: 50% 100%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            75% {
+                background-position: 50% 0%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+
+        }
+
+
+        /* =========================
+           GLOW
+        ========================= */
+
+        .glow {
+            position: absolute;
+
+            width: 280px;
+            height: 280px;
+
+            border-radius: 50%;
+
+            filter: blur(100px);
+
+            opacity: 0.35;
+
+            animation: glowMove 7s ease-in-out infinite alternate;
+        }
+
+        .glow.one {
+            top: -100px;
+            left: -100px;
+            background: #ffffff;
+        }
+
+        .glow.two {
+            bottom: -100px;
+            right: -100px;
+            background: #ffffff;
+
+            animation-delay: 2s;
+        }
+
+        @keyframes glowMove {
+
+            from {
+                transform: translate(0, 0);
+            }
+
+            to {
+                transform: translate(70px, 50px);
+            }
+
+        }
+
+
+        /* =========================
+           FLOATING PARTICLES
+        ========================= */
+
+        .particle {
+            position: absolute;
+
+            bottom: -50px;
+
+            color: white;
+
+            font-size: 20px;
+
+            opacity: 0.6;
+
+            animation: floatUp linear infinite;
+
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+
+            0% {
+                transform:
+                    translateY(0)
+                    rotate(0deg);
+
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 0.7;
+            }
+
+            100% {
+                transform:
+                    translateY(-110vh)
+                    rotate(360deg);
+
+                opacity: 0;
+            }
+
+        }
+
+
+        /* =========================
+           MAIN CARD
+        ========================= */
+
+        .card {
+
+            position: relative;
+
+            z-index: 10;
+
+            width: 90%;
+            max-width: 520px;
+
+            padding: 45px 30px;
+
+            text-align: center;
+
+            background: rgba(
+                255,
+                255,
+                255,
+                0.25
+            );
+
+            border:
+                1px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.5
+                );
+
+            border-radius: 30px;
+
+            backdrop-filter: blur(18px);
+
+            -webkit-backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 20px 60px
+                rgba(0, 0, 0, 0.18);
+
+            animation: cardAppear 1.2s ease;
+        }
+
+
+        @keyframes cardAppear {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(40px)
+                    scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+
+        }
+
+
+        /* =========================
+           TEXT
+        ========================= */
+
+        .small {
+
+            font-size: 13px;
+
+            letter-spacing: 3px;
+
+            color: #555;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        h1 {
+
+            font-size: 40px;
+
+            color: #333;
+
+            margin-bottom: 20px;
+
+            animation:
+                softGlow
+                2s
+                ease-in-out
+                infinite
+                alternate;
+
+        }
+
+
+        @keyframes softGlow {
+
+            from {
+                text-shadow:
+                    0 0 5px
+                    rgba(255, 255, 255, 0.3);
+            }
+
+            to {
+                text-shadow:
+                    0 0 25px
+                    rgba(255, 255, 255, 0.9);
+            }
+
+        }
+
+
+        .message {
+
+            font-size: 17px;
+
+            line-height: 1.8;
+
+            color: #444;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .question {
+
+            font-size: 21px;
+
+            font-weight: bold;
+
+            color: #333;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .buttons {
+
+            position: relative;
+
+            height: 80px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 18px;
+
+        }
+
+
+        button {
+
+            border: none;
+
+            padding:
+                14px
+                30px;
+
+            border-radius: 50px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition:
+                0.3s ease;
+
+        }
+
+
+        /* YES BUTTON */
+
+        #yes {
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff6b9d,
+                    #ff477e
+                );
+
+            box-shadow:
+                0 8px 25px
+                rgba(
+                    255,
+                    71,
+                    126,
+                    0.4
+                );
+
+        }
+
+
+        #yes:hover {
+
+            transform:
+                scale(1.12);
+
+            box-shadow:
+                0 12px 35px
+                rgba(
+                    255,
+                    71,
+                    126,
+                    0.55
+                );
+
+        }
+
+
+        /* NO BUTTON */
+
+        #no {
+
+            color: #555;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.75
+                );
+
+            position: relative;
+
+        }
+
+
+        /* =========================
+           RESULT
+        ========================= */
+
+        #result {
+
+            display: none;
+
+            margin-top: 25px;
+
+            animation:
+                resultAppear
+                1s
+                ease;
+
+        }
+
+
+        #result h2 {
+
+            color: #ff477e;
+
+            font-size: 30px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        #result p {
+
+            color: #555;
+
+            font-size: 16px;
+
+            line-height: 1.7;
+
+        }
+
+
+        @keyframes resultAppear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    scale(0.5);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    scale(1);
+
+            }
+
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 500px) {
+
+            .card {
+
+                padding:
+                    35px
+                    20px;
+
+            }
+
+            h1 {
+
+                font-size: 32px;
+
+            }
+
+            .message {
+
+                font-size: 15px;
+
+            }
+
+            .question {
+
+                font-size: 18px;
+
+            }
+
+            button {
+
+                padding:
+                    12px
+                    24px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- GLOW BACKGROUND -->
+
+    <div class="glow one"></div>
+
+    <div class="glow two"></div>
+
+
+    <!-- FLOATING PARTICLES -->
+
+    <div class="particle"
+         style="left:5%; animation-duration:8s;">
+        ♡
+    </div>
+
+    <div class="particle"
+         style="left:15%; animation-duration:6s;">
+        ✦
+    </div>
+
+    <div class="particle"
+         style="left:25%; animation-duration:9s;">
+        ♡
+    </div>
+
+    <div class="particle"
+         style="left:35%; animation-duration:7s;">
+        ✧
+    </div>
+
+    <div class="particle"
+         style="left:45%; animation-duration:10s;">
+        ♡
+    </div>
+
+    <div class="particle"
+         style="left:55%; animation-duration:6s;">
+        ✦
+    </div>
+
+    <div class="particle"
+         style="left:65%; animation-duration:8s;">
+        ♡
+    </div>
+
+    <div class="particle"
+         style="left:75%; animation-duration:7s;">
+        ✧
+    </div>
+
+    <div class="particle"
+         style="left:85%; animation-duration:9s;">
+        ♡
+    </div>
+
+    <div class="particle"
+         style="left:95%; animation-duration:6s;">
+        ✦
+    </div>
+
+
+    <!-- MAIN CARD -->
+
+    <div class="card">
+
+
+        <div class="small">
+            I HAVE SOMETHING TO SAY...
+        </div>
+
+
+        <h1>
+            For You ♡
+        </h1>
+
+
+        <div class="message">
+
+            Ada sesuatu yang sudah lama
+            ingin aku sampaikan.
+
+            <br>
+
+            Setiap kali ngobrol sama kamu,
+            entah kenapa hariku terasa
+            sedikit lebih menyenangkan.
+
+        </div>
+
+
+        <div class="question">
+
+            Maukah kamu menjadi
+            seseorang yang spesial buat aku? ♡
+
+        </div>
+
+
+        <!-- BUTTON -->
+
+        <div class="buttons">
+
+            <button
+                id="yes"
+                onclick="yesAnswer()">
+
+                Iya ♡
+
+            </button>
+
+
+            <button
+                id="no"
+                onmouseover="moveNo()">
+
+                Tidak
+
+            </button>
+
+        </div>
+
+
+        <!-- RESULT -->
+
+        <div id="result">
+
+            <h2>
+                Yey... ♡
+            </h2>
+
+            <p>
+
+                Terima kasih sudah memilih
+                "Iya". 🥹
+
+                <br>
+
+                Semoga kita bisa membuat
+                banyak cerita bersama.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <script>
+
+
+        /* =========================
+           YES
+        ========================= */
+
+        function yesAnswer() {
+
+            document
+                .getElementById("result")
+                .style.display = "block";
+
+
+            document
+                .getElementById("yes")
+                .style.display = "none";
+
+
+            document
+                .getElementById("no")
+                .style.display = "none";
+
+
+            createParticles();
+
+        }
+
+
+
+        /* =========================
+           NO BUTTON ESCAPE
+        ========================= */
+
+        function moveNo() {
+
+            const button =
+                document.getElementById("no");
+
+
+            const maxX =
+                window.innerWidth
+                - button.offsetWidth
+                - 20;
+
+
+            const maxY =
+                window.innerHeight
+                - button.offsetHeight
+                - 20;
+
+
+            const randomX =
+                Math.random()
+                * maxX;
+
+
+            const randomY =
+                Math.random()
+                * maxY;
+
+
+            button.style.position =
+                "fixed";
+
+
+            button.style.left =
+                randomX + "px";
+
+
+            button.style.top =
+                randomY + "px";
+
+        }
+
+
+
+        /* =========================
+           YES PARTICLES
+        ========================= */
+
+        function createParticles() {
+
+            const symbols = [
+                "♡",
+                "✦",
+                "✧",
+                "✨"
+            ];
+
+
+            for (
+                let i = 0;
+                i < 40;
+                i++
+            ) {
+
+                const particle =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                particle.className =
+                    "particle";
+
+
+                particle.innerHTML =
+                    symbols[
+                        Math.floor(
+                            Math.random()
+                            * symbols.length
+                        )
+                    ];
+
+
+                particle.style.left =
+                    Math.random()
+                    * 100
+                    + "vw";
+
+
+                particle.style.fontSize =
+                    Math.random()
+                    * 20
+                    + 15
+                    + "px";
+
+
+                particle.style.animationDuration =
+                    Math.random()
+                    * 4
+                    + 3
+                    + "s";
+
+
+                document.body.appendChild(
+                    particle
+                );
+
+
+                setTimeout(() => {
+
+                    particle.remove();
+
+                }, 7000);
+
+            }
+
+        }
+
+    </script>
+
+
+</body>
+  </html>
